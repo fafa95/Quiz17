@@ -3,13 +3,12 @@
 <ul>
     <% for (var i in tips) { %>
         <% var tip = tips[i]; %>
-
         <li>
-
             <% if (tip.accepted ||
                     (session.user && (session.user.isAdmin || (quizAuthorId && quizAuthorId === session.user.id)))) { %>
 
                 <%= tip.text %>
+		<small><span id="autor"> (by <%= tip.AuthorId %>) </span></small>
 
             <% } %>
 
