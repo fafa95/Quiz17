@@ -196,18 +196,13 @@ exports.randomPlay = function (req, res, next) {
 		function (quizzes) {
 			if (quizzes.length == req.session.seen.length) {
 				req.session.seen = [];
-				var puntos = req.session.score;
-				req.session.score = 0;
 				res.render('quizzes/random_none', {
-					score: puntos
-
-				})
-
-				
+					score: req.session.score
+				})	
 			}
 			
 			do {
-				var quizId = Math.floor(Math.random() * (quizzes.length+0.5) + 1);
+				var quizId = Math.floor(Math.random() * (quizzes.length) + 1);
 				if (quizId > quizzes.length) {
 					console.log("quizId mayor que length");
 					quizId = 1;
@@ -244,6 +239,8 @@ exports.randomCheck = function (req, res, next) {
 	
 	if (result) {
 		req.session.score++;
+	} else {
+		req.session.score = 0;
 	}
 
 	res.render('quizzes/random_result', {
