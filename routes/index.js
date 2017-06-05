@@ -46,6 +46,11 @@ router.get('/author', function (req, res, next) {
     res.render('author');
 });
 
+// Pagina de ayuda
+router.get('/help', function(req, res, next) {
+    res.render('help');
+});
+
 
 // Autoload de rutas que usen :quizId
 router.param('quizId', quizController.load);
@@ -130,6 +135,9 @@ router.put('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)/accept',
 router.delete('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)',
     sessionController.loginRequired,
     tipController.destroy);
+
+router.get('/quizzes/randomplay',	   quizController.randomPlay);
+router.get('/quizzes/randomcheck/:quizId(\\d+)',  quizController.randomCheck);
 
 
 module.exports = router;
